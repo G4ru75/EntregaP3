@@ -29,49 +29,47 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVentas));
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbometododepago = new System.Windows.Forms.ComboBox();
-            this.txtfecha = new System.Windows.Forms.TextBox();
+            this.cboPagos = new System.Windows.Forms.ComboBox();
+            this.txtFecha = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnbuscarproveedor = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtApellidoCliente = new System.Windows.Forms.TextBox();
+            this.txtNombreCliente = new System.Windows.Forms.TextBox();
             this.txtnombreproveedor = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtcantidad = new System.Windows.Forms.NumericUpDown();
-            this.txtprecioproducto = new System.Windows.Forms.TextBox();
+            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+            this.txtprecio = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtproducto = new System.Windows.Forms.TextBox();
+            this.btnbuscarproducto = new FontAwesome.Sharp.IconButton();
             this.txtidproducto = new System.Windows.Forms.TextBox();
-            this.txtcodproducto = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvTablaVentas = new System.Windows.Forms.DataGridView();
+            this.IDVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.txttotalpagar = new System.Windows.Forms.TextBox();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtpago = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.btncrearventa = new FontAwesome.Sharp.IconButton();
-            this.btnAgregarProducto = new FontAwesome.Sharp.IconButton();
-            this.btnbuscarproducto = new FontAwesome.Sharp.IconButton();
+            this.txtVueltos = new System.Windows.Forms.TextBox();
+            this.btnVender = new FontAwesome.Sharp.IconButton();
+            this.BtnCerrar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.btnbuscarproveedor.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcantidad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTablaVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -89,8 +87,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Silver;
-            this.groupBox1.Controls.Add(this.cbometododepago);
-            this.groupBox1.Controls.Add(this.txtfecha);
+            this.groupBox1.Controls.Add(this.cboPagos);
+            this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -101,20 +99,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de Venta";
             // 
-            // cbometododepago
+            // cboPagos
             // 
-            this.cbometododepago.FormattingEnabled = true;
-            this.cbometododepago.Location = new System.Drawing.Point(225, 53);
-            this.cbometododepago.Name = "cbometododepago";
-            this.cbometododepago.Size = new System.Drawing.Size(256, 28);
-            this.cbometododepago.TabIndex = 3;
+            this.cboPagos.FormattingEnabled = true;
+            this.cboPagos.Location = new System.Drawing.Point(225, 53);
+            this.cboPagos.Name = "cboPagos";
+            this.cboPagos.Size = new System.Drawing.Size(256, 28);
+            this.cboPagos.TabIndex = 3;
             // 
-            // txtfecha
+            // txtFecha
             // 
-            this.txtfecha.Location = new System.Drawing.Point(9, 56);
-            this.txtfecha.Name = "txtfecha";
-            this.txtfecha.Size = new System.Drawing.Size(199, 27);
-            this.txtfecha.TabIndex = 2;
+            this.txtFecha.Location = new System.Drawing.Point(9, 56);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(199, 27);
+            this.txtFecha.TabIndex = 2;
             // 
             // label4
             // 
@@ -138,8 +136,8 @@
             // 
             this.btnbuscarproveedor.BackColor = System.Drawing.Color.Silver;
             this.btnbuscarproveedor.Controls.Add(this.label5);
-            this.btnbuscarproveedor.Controls.Add(this.textBox2);
-            this.btnbuscarproveedor.Controls.Add(this.textBox1);
+            this.btnbuscarproveedor.Controls.Add(this.txtApellidoCliente);
+            this.btnbuscarproveedor.Controls.Add(this.txtNombreCliente);
             this.btnbuscarproveedor.Controls.Add(this.txtnombreproveedor);
             this.btnbuscarproveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnbuscarproveedor.Location = new System.Drawing.Point(701, 115);
@@ -149,12 +147,28 @@
             this.btnbuscarproveedor.TabStop = false;
             this.btnbuscarproveedor.Text = "Informacion de cliente";
             // 
-            // textBox1
+            // label5
             // 
-            this.textBox1.Location = new System.Drawing.Point(20, 56);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 27);
-            this.textBox1.TabIndex = 3;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(218, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 20);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Apellido";
+            // 
+            // txtApellidoCliente
+            // 
+            this.txtApellidoCliente.Location = new System.Drawing.Point(222, 54);
+            this.txtApellidoCliente.Name = "txtApellidoCliente";
+            this.txtApellidoCliente.Size = new System.Drawing.Size(174, 27);
+            this.txtApellidoCliente.TabIndex = 5;
+            // 
+            // txtNombreCliente
+            // 
+            this.txtNombreCliente.Location = new System.Drawing.Point(20, 56);
+            this.txtNombreCliente.Name = "txtNombreCliente";
+            this.txtNombreCliente.Size = new System.Drawing.Size(174, 27);
+            this.txtNombreCliente.TabIndex = 3;
             // 
             // txtnombreproveedor
             // 
@@ -170,38 +184,22 @@
             this.label1.BackColor = System.Drawing.Color.Silver;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(182, 59);
+            this.label1.Location = new System.Drawing.Point(182, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(971, 604);
+            this.label1.Size = new System.Drawing.Size(981, 597);
             this.label1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(222, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(174, 27);
-            this.textBox2.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(218, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 20);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Apellido";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Silver;
-            this.groupBox2.Controls.Add(this.txtcantidad);
-            this.groupBox2.Controls.Add(this.txtprecioproducto);
+            this.groupBox2.Controls.Add(this.nudCantidad);
+            this.groupBox2.Controls.Add(this.txtprecio);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtproducto);
             this.groupBox2.Controls.Add(this.btnbuscarproducto);
             this.groupBox2.Controls.Add(this.txtidproducto);
-            this.groupBox2.Controls.Add(this.txtcodproducto);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,24 +210,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informacion de Producto";
             // 
-            // txtcantidad
+            // nudCantidad
             // 
-            this.txtcantidad.Location = new System.Drawing.Point(616, 54);
-            this.txtcantidad.Name = "txtcantidad";
-            this.txtcantidad.Size = new System.Drawing.Size(78, 27);
-            this.txtcantidad.TabIndex = 14;
-            this.txtcantidad.Value = new decimal(new int[] {
+            this.nudCantidad.Location = new System.Drawing.Point(616, 54);
+            this.nudCantidad.Name = "nudCantidad";
+            this.nudCantidad.Size = new System.Drawing.Size(78, 27);
+            this.nudCantidad.TabIndex = 14;
+            this.nudCantidad.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.nudCantidad.ValueChanged += new System.EventHandler(this.txtcantidad_ValueChanged);
             // 
-            // txtprecioproducto
+            // txtprecio
             // 
-            this.txtprecioproducto.Location = new System.Drawing.Point(464, 54);
-            this.txtprecioproducto.Name = "txtprecioproducto";
-            this.txtprecioproducto.Size = new System.Drawing.Size(121, 27);
-            this.txtprecioproducto.TabIndex = 12;
+            this.txtprecio.Location = new System.Drawing.Point(464, 54);
+            this.txtprecio.Name = "txtprecio";
+            this.txtprecio.Size = new System.Drawing.Size(121, 27);
+            this.txtprecio.TabIndex = 12;
+            this.txtprecio.TextChanged += new System.EventHandler(this.txtprecio_TextChanged);
             // 
             // label10
             // 
@@ -256,19 +256,26 @@
             this.txtproducto.Size = new System.Drawing.Size(194, 27);
             this.txtproducto.TabIndex = 8;
             // 
+            // btnbuscarproducto
+            // 
+            this.btnbuscarproducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnbuscarproducto.IconChar = FontAwesome.Sharp.IconChar.SearchMinus;
+            this.btnbuscarproducto.IconColor = System.Drawing.Color.Black;
+            this.btnbuscarproducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnbuscarproducto.IconSize = 20;
+            this.btnbuscarproducto.Location = new System.Drawing.Point(220, 54);
+            this.btnbuscarproducto.Name = "btnbuscarproducto";
+            this.btnbuscarproducto.Size = new System.Drawing.Size(29, 28);
+            this.btnbuscarproducto.TabIndex = 7;
+            this.btnbuscarproducto.UseVisualStyleBackColor = true;
+            // 
             // txtidproducto
             // 
-            this.txtidproducto.Location = new System.Drawing.Point(180, 26);
+            this.txtidproducto.Location = new System.Drawing.Point(9, 56);
             this.txtidproducto.Name = "txtidproducto";
-            this.txtidproducto.Size = new System.Drawing.Size(34, 27);
-            this.txtidproducto.TabIndex = 6;
-            // 
-            // txtcodproducto
-            // 
-            this.txtcodproducto.Location = new System.Drawing.Point(9, 56);
-            this.txtcodproducto.Name = "txtcodproducto";
-            this.txtcodproducto.Size = new System.Drawing.Size(205, 27);
-            this.txtcodproducto.TabIndex = 2;
+            this.txtidproducto.Size = new System.Drawing.Size(205, 27);
+            this.txtidproducto.TabIndex = 2;
+            this.txtidproducto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtidproducto_MouseClick);
             // 
             // label7
             // 
@@ -288,9 +295,9 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Cod producto";
             // 
-            // dataGridView1
+            // dgvTablaVentas
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTablaVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -298,66 +305,56 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdProducto,
-            this.Producto,
-            this.Precio,
+            this.dgvTablaVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvTablaVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTablaVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDVenta,
+            this.IDProducto,
             this.Cantidad,
-            this.Subtotal,
-            this.btnEliminar});
-            this.dataGridView1.Location = new System.Drawing.Point(203, 340);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(765, 291);
-            this.dataGridView1.TabIndex = 8;
+            this.Precio});
+            this.dgvTablaVentas.Location = new System.Drawing.Point(203, 340);
+            this.dgvTablaVentas.Name = "dgvTablaVentas";
+            this.dgvTablaVentas.RowHeadersWidth = 51;
+            this.dgvTablaVentas.RowTemplate.Height = 24;
+            this.dgvTablaVentas.Size = new System.Drawing.Size(765, 291);
+            this.dgvTablaVentas.TabIndex = 8;
+            this.dgvTablaVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // IdProducto
+            // IDVenta
             // 
-            this.IdProducto.HeaderText = "IdProducto";
-            this.IdProducto.MinimumWidth = 6;
-            this.IdProducto.Name = "IdProducto";
-            this.IdProducto.Visible = false;
+            this.IDVenta.DataPropertyName = "IDVenta";
+            this.IDVenta.HeaderText = "N-venta";
+            this.IDVenta.MinimumWidth = 6;
+            this.IDVenta.Name = "IDVenta";
             // 
-            // Producto
+            // IDProducto
             // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.MinimumWidth = 6;
-            this.Producto.Name = "Producto";
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 6;
-            this.Precio.Name = "Precio";
+            this.IDProducto.DataPropertyName = "IDProducto";
+            this.IDProducto.HeaderText = "IDProducto";
+            this.IDProducto.MinimumWidth = 6;
+            this.IDProducto.Name = "IDProducto";
             // 
             // Cantidad
             // 
+            this.Cantidad.DataPropertyName = "Cantidad";
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.MinimumWidth = 6;
             this.Cantidad.Name = "Cantidad";
             // 
-            // Subtotal
+            // Precio
             // 
-            this.Subtotal.HeaderText = "Subtotal";
-            this.Subtotal.MinimumWidth = 6;
-            this.Subtotal.Name = "Subtotal";
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.HeaderText = "Precio";
+            this.Precio.MinimumWidth = 6;
+            this.Precio.Name = "Precio";
             // 
-            // btnEliminar
+            // txtTotal
             // 
-            this.btnEliminar.HeaderText = "";
-            this.btnEliminar.MinimumWidth = 6;
-            this.btnEliminar.Name = "btnEliminar";
-            // 
-            // txttotalpagar
-            // 
-            this.txttotalpagar.Location = new System.Drawing.Point(978, 412);
-            this.txttotalpagar.Name = "txttotalpagar";
-            this.txttotalpagar.Size = new System.Drawing.Size(119, 22);
-            this.txttotalpagar.TabIndex = 15;
-            this.txttotalpagar.TextChanged += new System.EventHandler(this.txttotalpagar_TextChanged);
+            this.txtTotal.Location = new System.Drawing.Point(978, 412);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(119, 22);
+            this.txtTotal.TabIndex = 15;
+            this.txtTotal.TextChanged += new System.EventHandler(this.txttotalpagar_TextChanged);
             // 
             // label6
             // 
@@ -376,6 +373,7 @@
             this.txtpago.Name = "txtpago";
             this.txtpago.Size = new System.Drawing.Size(119, 22);
             this.txtpago.TabIndex = 17;
+            this.txtpago.TextChanged += new System.EventHandler(this.txtpago_TextChanged);
             // 
             // label9
             // 
@@ -399,58 +397,44 @@
             this.label12.TabIndex = 19;
             this.label12.Text = "Cambio:";
             // 
-            // textBox3
+            // txtVueltos
             // 
-            this.textBox3.Location = new System.Drawing.Point(978, 538);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(119, 22);
-            this.textBox3.TabIndex = 20;
+            this.txtVueltos.Location = new System.Drawing.Point(978, 538);
+            this.txtVueltos.Name = "txtVueltos";
+            this.txtVueltos.Size = new System.Drawing.Size(119, 22);
+            this.txtVueltos.TabIndex = 20;
             // 
-            // btncrearventa
+            // btnVender
             // 
-            this.btncrearventa.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btncrearventa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncrearventa.ForeColor = System.Drawing.Color.Black;
-            this.btncrearventa.IconChar = FontAwesome.Sharp.IconChar.Tag;
-            this.btncrearventa.IconColor = System.Drawing.Color.Black;
-            this.btncrearventa.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btncrearventa.IconSize = 30;
-            this.btncrearventa.Location = new System.Drawing.Point(978, 569);
-            this.btncrearventa.Name = "btncrearventa";
-            this.btncrearventa.Size = new System.Drawing.Size(123, 62);
-            this.btncrearventa.TabIndex = 21;
-            this.btncrearventa.Text = "Crear venta";
-            this.btncrearventa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btncrearventa.UseVisualStyleBackColor = false;
+            this.btnVender.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnVender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVender.ForeColor = System.Drawing.Color.Black;
+            this.btnVender.IconChar = FontAwesome.Sharp.IconChar.Tag;
+            this.btnVender.IconColor = System.Drawing.Color.Black;
+            this.btnVender.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnVender.IconSize = 30;
+            this.btnVender.Location = new System.Drawing.Point(978, 569);
+            this.btnVender.Name = "btnVender";
+            this.btnVender.Size = new System.Drawing.Size(158, 62);
+            this.btnVender.TabIndex = 21;
+            this.btnVender.Text = "Vender";
+            this.btnVender.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVender.UseVisualStyleBackColor = false;
+            this.btnVender.Click += new System.EventHandler(this.btnVender_Click);
             // 
-            // btnAgregarProducto
+            // BtnCerrar
             // 
-            this.btnAgregarProducto.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnAgregarProducto.ForeColor = System.Drawing.Color.Black;
-            this.btnAgregarProducto.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.btnAgregarProducto.IconColor = System.Drawing.Color.Black;
-            this.btnAgregarProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(1012, 233);
-            this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(107, 97);
-            this.btnAgregarProducto.TabIndex = 7;
-            this.btnAgregarProducto.Text = "Agregar";
-            this.btnAgregarProducto.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAgregarProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAgregarProducto.UseVisualStyleBackColor = false;
-            // 
-            // btnbuscarproducto
-            // 
-            this.btnbuscarproducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbuscarproducto.IconChar = FontAwesome.Sharp.IconChar.SearchMinus;
-            this.btnbuscarproducto.IconColor = System.Drawing.Color.Black;
-            this.btnbuscarproducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnbuscarproducto.IconSize = 20;
-            this.btnbuscarproducto.Location = new System.Drawing.Point(220, 54);
-            this.btnbuscarproducto.Name = "btnbuscarproducto";
-            this.btnbuscarproducto.Size = new System.Drawing.Size(29, 28);
-            this.btnbuscarproducto.TabIndex = 7;
-            this.btnbuscarproducto.UseVisualStyleBackColor = true;
+            this.BtnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCerrar.FlatAppearance.BorderSize = 0;
+            this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("BtnCerrar.Image")));
+            this.BtnCerrar.Location = new System.Drawing.Point(1122, 78);
+            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnCerrar.Name = "BtnCerrar";
+            this.BtnCerrar.Size = new System.Drawing.Size(32, 28);
+            this.BtnCerrar.TabIndex = 22;
+            this.BtnCerrar.UseVisualStyleBackColor = true;
+            this.BtnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
             // 
             // FormVentas
             // 
@@ -458,15 +442,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1561, 750);
-            this.Controls.Add(this.btncrearventa);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.BtnCerrar);
+            this.Controls.Add(this.btnVender);
+            this.Controls.Add(this.txtVueltos);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtpago);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txttotalpagar);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btnAgregarProducto);
+            this.Controls.Add(this.txtTotal);
+            this.Controls.Add(this.dgvTablaVentas);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnbuscarproveedor);
             this.Controls.Add(this.groupBox1);
@@ -475,14 +459,15 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormVentas";
             this.Text = "FormVentas";
+            this.Load += new System.EventHandler(this.FormVentas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.btnbuscarproveedor.ResumeLayout(false);
             this.btnbuscarproveedor.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTablaVentas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,41 +476,38 @@
         #endregion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cbometododepago;
-        private System.Windows.Forms.TextBox txtfecha;
+        private System.Windows.Forms.ComboBox cboPagos;
+        private System.Windows.Forms.TextBox txtFecha;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox btnbuscarproveedor;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombreCliente;
         private System.Windows.Forms.Label txtnombreproveedor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtApellidoCliente;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown txtcantidad;
-        private System.Windows.Forms.TextBox txtprecioproducto;
+        private System.Windows.Forms.NumericUpDown nudCantidad;
+        private System.Windows.Forms.TextBox txtprecio;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtproducto;
         private FontAwesome.Sharp.IconButton btnbuscarproducto;
         private System.Windows.Forms.TextBox txtidproducto;
-        private System.Windows.Forms.TextBox txtcodproducto;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label11;
-        private FontAwesome.Sharp.IconButton btnAgregarProducto;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
-        private System.Windows.Forms.TextBox txttotalpagar;
+        private System.Windows.Forms.DataGridView dgvTablaVentas;
+        private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtpago;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox3;
-        private FontAwesome.Sharp.IconButton btncrearventa;
+        private System.Windows.Forms.TextBox txtVueltos;
+        private FontAwesome.Sharp.IconButton btnVender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDVenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.Button BtnCerrar;
     }
 }

@@ -102,7 +102,7 @@ namespace GUI
         private void btnproducto_Click(object sender, EventArgs e)
         {
 
-            Productos frm = new Productos();
+            FormListaProductos frm = new FormListaProductos();
             frm.FormClosed += new FormClosedEventHandler(MostrarLogoAlcerrarForm);
             AbrirFormInPanel(frm);
         }
@@ -167,7 +167,8 @@ namespace GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            FormPagos pagos = new FormPagos();
+            AbrirFormInPanel(pagos);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -202,6 +203,12 @@ namespace GUI
         private void MenuCompras_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            FormListaCategorias frm = new FormListaCategorias();
+            AbrirFormInPanel(frm);        
         }
 
         private void btnListaProveedores_Click(object sender, EventArgs e)

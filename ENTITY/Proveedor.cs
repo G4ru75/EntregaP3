@@ -11,47 +11,32 @@ namespace ENTITY
     {
         public Proveedor()
         {
-            Producto = new List<Productos>(); 
+            
         }
 
-        public Proveedor(string iDProveedor, string tipoID, string nombre, double telefono, string email, List<Productos> producto)
+        public Proveedor(int idproveedor, TipoID tipoid, string nombre1, string nombre2, string apellido1, string apellido2, double telefono, string email)
         {
-            IDProveedor = iDProveedor;
-            TipoID = tipoID;
-            Nombre = nombre;
+            IDProveedor = idproveedor;
+            TipoID = tipoid;
+            Nombre1 = nombre1;
+            Nombre2 = nombre2;
+            Apellido1 = Apellido1;
+            Apellido2 = Apellido2;
             Telefono = telefono;
             Email = email;
-            Producto = producto ?? new List<Productos>(); 
+ 
         }
 
-        public string IDProveedor { get; set; }
-        public string TipoID { get; set; }
-        public string Nombre { get; set; }
+        public int IDProveedor { get; set; }
+        public TipoID TipoID { get; set; }
+        public string Nombre1 { get; set; }
+        public string Nombre2 { get; set; }
+        public string Apellido1 {get; set; }
+        public string Apellido2 { get; set; }
         public double Telefono { get; set; }
         public string Email { get; set; }
-        public List<Productos> Producto { get; set; }
 
-        public override string ToString()
-        {         
-            return $"{IDProveedor},{TipoID},{Nombre},{Telefono},{Email} ";
-
-        }
-
-        public void AgregarProducto(Productos producto)
-        {
-            if (!Producto.Contains(producto))
-            {
-                Producto.Add(producto);
-            }
-        }
-
-        public void EliminarProducto(Productos producto)
-        {
-            if (Producto.Contains(producto))
-            {
-                Producto.Remove(producto);
-            }
-        }
+        public string IDTipo => TipoID?.IDTipo ?? string.Empty;
     }
 }
 

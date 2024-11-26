@@ -10,70 +10,36 @@ namespace ProyectoAula
 {
     public class ProveedorService
     {
-        RepositorioProveedores Repositorio;
-        public event Action<Proveedor> ProveedorGuardado;
-        private List<Proveedor> proveedores;
-        public ProveedorService()
-        {
-            Repositorio = new RepositorioProveedores(Config.Filename_Prove);
-            RefrescarLista();
-        }
-        public void RefrescarLista()
-        {
-            proveedores = Repositorio.GetAll();
-        }
-        public string Guardar(Proveedor proveedor)
-        {
-            if (proveedores == null) 
-            { 
-                proveedores = new List<Proveedor>();
-            }
+        private ProveedorRepository ProveedorRepository;
 
-            proveedores.Add(proveedor);           
-            var msg = Repositorio.SaveData(proveedores);
-            RefrescarLista();
-            ProveedorGuardado?.Invoke(proveedor);
-            return msg;
-        }
-        public List<Proveedor> Consultar()
-        {
-            return proveedores ?? new List<Proveedor>();
+        public ProveedorService() 
+        { 
+            ProveedorRepository = new ProveedorRepository();
         }
 
-        public Proveedor BuscarId(string id)
+        public List<Proveedor> ObtenerProveedores()
         {
-            var prove = proveedores.FirstOrDefault<Proveedor>(x => x.IDProveedor == id);
-            return prove;
+            return ProveedorRepository.ObtenerProveedores();
         }
 
-        public string Actualizar(Proveedor proveedor)
+        public bool GuardarProveedor(Proveedor proveedor)
         {
-            var proveedorExistente = proveedores.FirstOrDefault<Proveedor>(x => x.IDProveedor == proveedor.IDProveedor);
-            if (proveedorExistente != null)
+            if (ProveedorRepository.ProveedorExiste(proveedor.IDProveedor))
             {
-                proveedorExistente.TipoID = proveedor.TipoID;
-                proveedorExistente.Nombre = proveedor.Nombre;
-                proveedorExistente.Telefono = proveedor.Telefono;
-                proveedorExistente.Email = proveedor.Email;                
-                var msg = Guardar(proveedorExistente);
-                RefrescarLista();
-                return "Provedor modificado";
-               
+                throw new ArgumentException("El proveedor ya existe en la base de datos.");
             }
-            return "Proveedor no encontrado";
+            return ProveedorRepository.GuardarProveedor(proveedor);
         }
 
-        public string Eliminar(string idProveedor)
+        public bool ModificarProveedor(Proveedor proveedor)
         {
-            var proveedore = proveedores.FirstOrDefault(x => x.IDProveedor == idProveedor); 
-            if (proveedore != null)
-            {
-                proveedores.Remove(proveedore);
-                 RefrescarLista();
-                return "Proveedor eliminado.";
-            } 
+            return ProveedorRepository.ModificarProveedor(proveedor); 
+        }
 
-            return "Proveedor no encontrado."; }
+        public bool EliminarProveedor(int idproveedor)
+        {
+            return ProveedorRepository.EliminarProvedor(idproveedor);
+        }
 
-            }
+    }
 }

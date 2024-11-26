@@ -9,35 +9,23 @@ namespace ENTITY
 {
     public class Factura
     {
-        public Factura()
-        {
-            Detalles = new List<DetalleFactura>();
-        }
-        public Factura(int idfactura, DateTime fechafactura, List<DetalleFactura> detalles)
+        public Factura() { }
+
+        public Factura(int idfactura, MetodoPagos idpago, DateTime fechafactura, decimal total, decimal monto, decimal vueltos) 
         {
             IDFactura = idfactura;
+            IDpago = idpago;
             FechaFactura = fechafactura;
-            Detalles = detalles ?? new List<DetalleFactura>();
-            CalcularTotal();
+            Total = total;
+            Monto = monto;
+            Vueltos = vueltos;
         }
 
         public int IDFactura { get; set; }
+        public MetodoPagos IDpago { get; set; }
         public DateTime FechaFactura { get; set; }
-        public decimal TotalFactura { get; private set; }
-        public List<DetalleFactura> Detalles { get; set; }
-
-        public void CalcularTotal()
-        {
-            TotalFactura = 0;
-            foreach (var detalle in Detalles)
-            {
-                TotalFactura += detalle.Cantidad * detalle.PrecioUnitario;
-            }
-        }
-        public override string ToString()
-        {
-            string detallesTexto = string.Join(",", Detalles.Select(d => d.ToString()));
-            return $"{IDFactura},{FechaFactura},{TotalFactura},{detallesTexto}";
-        }
+        public decimal Total {  get; set; }
+        public decimal Monto { get; set; }
+        public decimal Vueltos { get; set; }
     }
 }

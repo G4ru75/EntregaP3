@@ -1,4 +1,5 @@
 ﻿using ENTITY;
+using GUI.Modales;
 using ProyectoAula;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,22 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GUI
 {
     public partial class FormMantProveedor : Form
     {
-        ProveedorService Service;
-        public event Action ProveedorModificado;
+        ProveedorService ProveedorService;
+        TipoIDService TipoIDService;
         public FormMantProveedor()
         {
             InitializeComponent();
-            Service = new ProveedorService();
+            ProveedorService = new ProveedorService();
+            TipoIDService = new TipoIDService();
+            CargarTipos(); 
         }
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -53,27 +58,63 @@ namespace GUI
 
         private void btnguardar_Click(object sender, EventArgs e)
         {
-
+            
             if (!Validar())
             {
                 MessageBox.Show("Por favor revisar los datos");
             }
             else
             {
-                var proveedor = new Proveedor
+                if (GuardarProveedor())
                 {
-                    IDProveedor = txtIDProveedor.Text,
-                    TipoID = cboTipoID.SelectedText,
-                    Nombre = txtNombre.Text,
-                    Telefono = double.Parse(txtTelefono.Text),
-                    Email = txtEmail.Text
-                };
-                var mensaje = Service.Guardar(proveedor);
-                MessageBox.Show(mensaje);
-                Limpiar();
+                     Limpiar();
+                }
+                
             }
 
         }
+
+        private bool GuardarProveedor()
+        {
+            try
+
+            {
+                Proveedor proveedor = new Proveedor
+                {
+                    IDProveedor = int.Parse(txtIDProveedor.Text),
+                    TipoID = new TipoID(cboTipoID.SelectedValue.ToString(), cboTipoID.Text),
+                    Nombre1 = txtNombre.Text,
+                    Nombre2 = txtSegundoNombre.Text,
+                    Apellido1 = txtApellido.Text,
+                    Apellido2 = txtSegundoApellido.Text,
+                    Telefono = double.Parse(txtTelefono.Text),
+                    Email = txtEmail.Text
+                };
+
+                if (ProveedorService.GuardarProveedor(proveedor))
+                {
+                    MessageBox.Show("Proveedor guardado con éxito.");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar el proveedor.");
+                    return false;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
         private bool Validar()
         {
             txtEmail.Text = txtEmail.Text.Trim();
@@ -83,11 +124,9 @@ namespace GUI
                 return false;
             }
 
-            var tiposID = new[] { "TI", "CC", "TE", "CE" };
-            if (!tiposID.Contains(cboTipoID.Text))
+            if (cboTipoID.SelectedValue == null)
             {
-                MessageBox.Show("El tipo de ID debe ser TI, CC, TE o CE.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                MessageBox.Show("Debe seleccionar un valor valido en el tipo de id.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error); return false;
             }
 
             if (!Regex.IsMatch(txtNombre.Text, @"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$") || (txtNombre.Text == ""))
@@ -95,7 +134,30 @@ namespace GUI
                 MessageBox.Show("El nombre debe contener solo letras.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error); return false;
             }
 
-            if (!Regex.IsMatch(txtEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$") || (txtEmail.Text == ""))
+            if (!string.IsNullOrEmpty(txtSegundoNombre.Text) && !Regex.IsMatch(txtSegundoNombre.Text, @"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$"))
+            {
+                MessageBox.Show("El segundo nombre debe contener solo letras.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtApellido.Text, @"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$") || (txtApellido.Text == ""))
+            {
+                MessageBox.Show("El apellido debe contener solo letras.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error); return false;
+            }
+
+            if (!string.IsNullOrEmpty(txtSegundoApellido.Text) && !Regex.IsMatch(txtSegundoApellido.Text, @"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$"))
+            {
+                MessageBox.Show("El segundo apellido debe contener solo letras.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error); return false;
+            }
+
+            if (!Regex.IsMatch(txtTelefono.Text, @"^\d{10}$"))
+            {
+                MessageBox.Show("El número de teléfono debe contener exactamente 10 dígitos numéricos.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtTelefono.Focus();
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtEmail.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$") && !string.IsNullOrEmpty(txtEmail.Text))
             {
                 MessageBox.Show("Por favor, ingresa un email válido.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -110,6 +172,9 @@ namespace GUI
             txtIDProveedor.Text = "";
             cboTipoID.Text = "";
             txtNombre.Text = "";
+            txtSegundoNombre.Text = "";
+            txtApellido.Text = "";
+            txtSegundoApellido.Text = ""; 
             txtTelefono.Text = "";
             txtEmail.Text = "";
         }
@@ -131,18 +196,48 @@ namespace GUI
             }
             else
             {
-                var proveedor = new Proveedor
+                if (ModificarProveedor())
                 {
-                    IDProveedor = txtIDProveedor.Text,
-                    TipoID = cboTipoID.SelectedItem.ToString(),
-                    Nombre = txtNombre.Text,
-                    Telefono = double.Parse(txtTelefono.Text),
-                    Email = txtEmail.Text
-                };
-                var mensaje = Service.Actualizar(proveedor);
-                MessageBox.Show(mensaje);
-                ProveedorModificado?.Invoke(); 
+                    Limpiar();
+                }
+               
             }
+        }
+
+        private bool ModificarProveedor()
+        {
+            Proveedor proveedor = new Proveedor
+            {
+                IDProveedor = int.Parse(txtIDProveedor.Text),
+                TipoID = new TipoID(cboTipoID.SelectedValue.ToString(), cboTipoID.Text), // Aqui se Captura tipoid y nombre del tipo
+                Nombre1 = txtNombre.Text,
+                Nombre2 = txtSegundoNombre.Text,
+                Apellido1 = txtApellido.Text,
+                Apellido2 = txtSegundoApellido.Text,
+                Telefono = double.Parse(txtTelefono.Text),
+                Email = txtEmail.Text
+            };
+
+            bool resultado = ProveedorService.ModificarProveedor(proveedor);
+
+            if (resultado)
+            {
+                MessageBox.Show("Proveedor modificado con éxito.");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Error al modificar el proveedor.");
+                return false;
+            }
+        }
+
+        private void CargarTipos()
+        {
+            List<TipoID> Tipos = TipoIDService.ObtenerTiposID();
+            cboTipoID.DataSource = Tipos;
+            cboTipoID.DisplayMember = "Nombre";
+            cboTipoID.ValueMember = "IDTipo";
         }
 
         private void BarraTitulo_Paint(object sender, PaintEventArgs e)
@@ -185,10 +280,7 @@ namespace GUI
 
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void txtIDProveedor_TextChanged(object sender, EventArgs e)
         {

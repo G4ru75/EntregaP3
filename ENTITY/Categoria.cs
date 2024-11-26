@@ -10,20 +10,13 @@ namespace ENTITY
     {
         public Categoria() { }
 
-        public Categoria(int idcategoria, string nombrecategoria, string descripcion)
+        public Categoria(string idcategoria, string nombrecategoria)
         {
             IDCategoria = idcategoria;
-            NombreCategoria = nombrecategoria;
-            Descripcion = descripcion; 
+            NombreCategoria = nombrecategoria; 
         }
 
-        public int IDCategoria { get; set; }
+        public string IDCategoria { get; set; }
         public string NombreCategoria { get; set; }
-        public string Descripcion { get; set; }
-
-        public override string ToString()
-        {
-            return $"{IDCategoria},{NombreCategoria},{Descripcion}"; 
-        }
     }
 }

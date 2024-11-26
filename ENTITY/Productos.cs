@@ -11,29 +11,21 @@ namespace ENTITY
 
         public Productos() { }
 
-        public Productos(int iDProducto, string nombreProducto, decimal precioCompra, int cantidad, Categoria categoria)
+        public Productos(string idproducto, Categoria idcategoria, string nombreproducto, decimal precioventa, int cantidad)
         {
-            IDProducto = iDProducto;
-            NombreProducto = nombreProducto;
-            PrecioCompra = precioCompra;
+            IDProducto = idproducto;
+            IDCategoria = idcategoria;
+            NombreProducto = nombreproducto;
+            PrecioVenta = precioventa;
             Cantidad = cantidad;
-            Categoria = categoria;
         }
 
-        public int IDProducto { get; set; }
+        public string IDProducto { get; set; }
+        public Categoria IDCategoria { get; set; }
         public string NombreProducto { get; set; }
-        public decimal PrecioCompra { get; set; }
-        public int Cantidad { get; set; }
-        public Categoria Categoria { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public decimal Cantidad { get; set; }
 
-        public override string ToString()
-        {
-            return $"{IDProducto},{NombreProducto},{PrecioCompra},{Categoria.IDCategoria}";
-        }
-
-        public void ActualizarStock(int cantidad)
-        {
-            Cantidad += cantidad;
-        }
+        public string CategoriaID => IDCategoria?.IDCategoria ?? string.Empty;
     }
 }
